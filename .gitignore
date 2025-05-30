@@ -1,0 +1,8 @@
+# Database credentials
+secrets/
+
+# Ignore all .DS_Store files
+.DS_Store
+
+# Ignore __pycache__
+src/export_tool/__pycache__

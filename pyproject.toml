@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "export_tool"
+version = "0.0.0"
+description = "Export Tool"
+authors = ["ARL-at-UH <arl-it@arl.hawaii.edu>"]
+readme = "README.md"
+packages = [
+    { include = "export_tool", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.10"
+pandas = "^2.2.3"
+
+[tool.poetry.scripts]
+export-tool = "export_tool.__main__:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
