@@ -91,11 +91,6 @@ poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-time
 poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 1000 --format csv
 ```
 
-**Output**: Single file with columns like:
-```
-timestamp | pca9548_bme280_data_temperature | pca9548_bme280_data_humidity | tsys01_data_temperature
-```
-
 ### 📁 Separate Files (Best for Different Schemas)
 Each sensor gets its own file with all original columns preserved.
 
