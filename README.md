@@ -170,34 +170,41 @@ poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --
 
 ### Time Series Analysis Workflow
 
+**1. Set up credentials (one time)**
 ```bash
 poetry run python setup_secrets.py
 ```
 
+**2. Check your data structure**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --test-connection
 ```
 
+**3. Export small sample to verify format**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 10 --format csv
 ```
 
+**4. Export full dataset for analysis**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv json
 ```
 
+**5. Export specific time period**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --start-time "2024-12-01" --end-time "2024-12-31" --format excel
 ```
 
 ### Data Backup Workflow
 
+**Export each sensor separately with full schema**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --separate-files --format csv json --out-dir ./backups
 ```
 
 ### Custom Analysis Workflow
 
+**Use custom SQL for complex queries**
 ```bash
 poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --query "SELECT * FROM pca9548_bme280_data WHERE temperature > 25 ORDER BY timestamp DESC LIMIT 100" --format csv
 ```
@@ -239,20 +246,24 @@ poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --
 
 ### Connection Issues
 
+**Test your connection parameters**
 ```bash
 poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --test-connection
 ```
 
 ### Missing Credentials
 
+**Set up credentials properly**
 ```bash
 poetry run python setup_secrets.py
 ```
 
+**Or use environment variables (username)**
 ```bash
 export DB_USER="your_username"
 ```
 
+**Or use environment variables (password)**
 ```bash
 export DB_PASSWORD="your_password"
 ```
@@ -260,20 +271,24 @@ export DB_PASSWORD="your_password"
 ### Schema Conflicts
 If you get "UNION query must have the same number of columns":
 
+**Use separate files instead**
 ```bash
 poetry run python src/export_tool/__main__.py --separate-files --format csv
 ```
 
+**OR use merged time series**
 ```bash
 poetry run python src/export_tool/__main__.py --merge-on-timestamp --format csv
 ```
 
 ### Large Dataset Performance
 
+**Test with small sample first**
 ```bash
 poetry run python src/export_tool/__main__.py --limit 100 --format csv
 ```
 
+**Then export specific time ranges**
 ```bash
 poetry run python src/export_tool/__main__.py --start-time "2024-12-01" --format csv
 ```
