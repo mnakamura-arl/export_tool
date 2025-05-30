@@ -57,17 +57,17 @@ poetry run python setup_secrets.py
 
 ### 2. Test Connection
 ```bash
-poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --test-connection
+poetry run export-tool --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --test-connection
 ```
 
 ### 3. List Available Sensors
 ```bash
-poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --list-sensors
+poetry run export-tool --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --list-sensors
 ```
 
 ### 4. Export All Data (Merged Time Series)
 ```bash
-poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --merge-on-timestamp --format csv
+poetry run export-tool --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --merge-on-timestamp --format csv
 ```
 
 ## Export Modes
@@ -76,19 +76,19 @@ poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT 
 Creates a wide-format table with timestamp as the key and all sensor readings as columns.
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --start-time "2024-01-01" --end-time "2024-12-31" --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --start-time "2024-01-01" --end-time "2024-12-31" --format csv
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv json excel
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv json excel
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 1000 --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 1000 --format csv
 ```
 
 **Output**: Single file with columns like:
@@ -100,15 +100,15 @@ timestamp | pca9548_bme280_data_temperature | pca9548_bme280_data_humidity | tsy
 Each sensor gets its own file with all original columns preserved.
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --separate-files --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --separate-files --format csv
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --sensors pca9548_bme280_data tsys01_data --separate-files --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --sensors pca9548_bme280_data tsys01_data --separate-files --format csv
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --separate-files --start-time "2024-12-01" --format csv json
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --separate-files --start-time "2024-12-01" --format csv json
 ```
 
 **Output**: Multiple files like `sensor_pca9548_bme280_data_20241230T120000Z.csv`
@@ -117,11 +117,11 @@ poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --
 All sensors in one file, long format, using only columns common to all tables.
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --format csv
 ```
 
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --sensors pca9548_bme280_data --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --sensors pca9548_bme280_data --format csv
 ```
 
 ## Command Line Options
@@ -177,36 +177,36 @@ poetry run python setup_secrets.py
 
 **2. Check your data structure**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --test-connection
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --test-connection
 ```
 
 **3. Export small sample to verify format**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 10 --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --limit 10 --format csv
 ```
 
 **4. Export full dataset for analysis**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv json
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --format csv json
 ```
 
 **5. Export specific time period**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --start-time "2024-12-01" --end-time "2024-12-31" --format excel
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --merge-on-timestamp --start-time "2024-12-01" --end-time "2024-12-31" --format excel
 ```
 
 ### Data Backup Workflow
 
 **Export each sensor separately with full schema**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --separate-files --format csv json --out-dir ./backups
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --separate-files --format csv json --out-dir ./backups
 ```
 
 ### Custom Analysis Workflow
 
 **Use custom SQL for complex queries**
 ```bash
-poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --db data --query "SELECT * FROM pca9548_bme280_data WHERE temperature > 25 ORDER BY timestamp DESC LIMIT 100" --format csv
+poetry run export-tool --host 192.168.1.12 --port 8001 --db data --query "SELECT * FROM pca9548_bme280_data WHERE temperature > 25 ORDER BY timestamp DESC LIMIT 100" --format csv
 ```
 
 ## Output Files
@@ -248,7 +248,7 @@ poetry run python src/export_tool/__main__.py --host 192.168.1.12 --port 8001 --
 
 **Test your connection parameters**
 ```bash
-poetry run python src/export_tool/__main__.py --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --test-connection
+poetry run export-tool --host YOUR_HOST --port YOUR_PORT --db YOUR_DB --test-connection
 ```
 
 ### Missing Credentials
@@ -273,22 +273,22 @@ If you get "UNION query must have the same number of columns":
 
 **Use separate files instead**
 ```bash
-poetry run python src/export_tool/__main__.py --separate-files --format csv
+poetry run export-tool --separate-files --format csv
 ```
 
 **OR use merged time series**
 ```bash
-poetry run python src/export_tool/__main__.py --merge-on-timestamp --format csv
+poetry run export-tool --merge-on-timestamp --format csv
 ```
 
 ### Large Dataset Performance
 
 **Test with small sample first**
 ```bash
-poetry run python src/export_tool/__main__.py --limit 100 --format csv
+poetry run export-tool --limit 100 --format csv
 ```
 
 **Then export specific time ranges**
 ```bash
-poetry run python src/export_tool/__main__.py --start-time "2024-12-01" --format csv
+poetry run export-tool --start-time "2024-12-01" --format csv
 ```
