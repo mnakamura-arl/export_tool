@@ -16,12 +16,13 @@ A flexible Python tool for querying and exporting PostgreSQL sensor data in mult
 ## Installation
 
 ```bash
-poetry install
+pyenv local 3.10
 ```
 
 ```bash
-poetry run python src/export_tool/setup_secrets.py
+poetry install
 ```
+
 
 ## 🔒 Secure Credential Setup (Required)
 
@@ -29,7 +30,7 @@ The tool requires database credentials to be stored securely. It supports two me
 
 ### 1. Secret Files (Recommended)
 ```bash
-poetry run python setup_secrets.py
+poetry run python src/export_tool/setup_secrets.py
 ```
 
 This creates:
@@ -52,7 +53,7 @@ export DB_PASSWORD="your_password"
 
 ### 1. Set Up Credentials (One Time)
 ```bash
-poetry run python setup_secrets.py
+poetry run python src/export_tool/setup_secrets.py
 ```
 
 ### 2. Test Connection
