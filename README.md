@@ -20,7 +20,7 @@ poetry install
 ```
 
 ```bash
-poetry run python setup_secrets.py
+poetry run python src/export_tool/setup_secrets.py
 ```
 
 ## 🔒 Secure Credential Setup (Required)
