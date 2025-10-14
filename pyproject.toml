@@ -12,6 +12,7 @@ packages = [
 python = "^3.10"
 psycopg2-binary = "^2.9.10"
 pandas = "^2.2.3"
+requests = "^2.32.4"
 
 [tool.poetry.scripts]
 export-tool = "export_tool.__main__:main"
